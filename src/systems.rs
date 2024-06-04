@@ -24,7 +24,6 @@ pub fn camera_follow_target(
             }
 
             if !all_positions_query.contains(camera_target.0.unwrap()) {
-                debug!("!all_positions_query.contains(camera_target.0.unwrap())");
                 return;
             }
 
@@ -99,7 +98,6 @@ fn handle_screen_by_screen(
     lerp_factor: &Vec2,
     dt: f32,
 ) {
-    debug!("handle_screen_by_screen");
     let scaled_bounds = calculate_scaled_screenbounds(ortho);
     let cam_pos = camera_position.clone();
     let sw = scaled_bounds.x;
