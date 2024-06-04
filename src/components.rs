@@ -77,4 +77,5 @@ pub struct CameraBundle2D {
     pub style: CameraStyle,
     pub lerp: CameraLerp,
     pub lead: CameraLead,
+    pub target: CameraTarget,
 }

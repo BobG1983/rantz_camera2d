@@ -14,7 +14,6 @@ fn main_camera_valid(num_cameras: usize, num_camera_targets: usize) -> bool {
     if num_camera_targets > 1 {
         error!("Multiple main camera targets found, only one is supported");
     }
-
     return false;
 }
 
@@ -50,8 +49,8 @@ pub fn set_intial_main_camera_target(
 }
 
 pub fn main_camera_target_added(
-    mut main_camera_query: Query<&mut CameraTarget, With<MainCamera>>,
     main_camera_target_query: Query<Entity, (Added<MainCameraShouldTarget>, With<Position2D>)>,
+    mut main_camera_query: Query<&mut CameraTarget, With<MainCamera>>,
 ) {
     let num_cams = main_camera_query.iter().count();
     let num_targets = main_camera_target_query.iter().count();
@@ -59,12 +58,11 @@ pub fn main_camera_target_added(
         let mut camera_target = main_camera_query.get_single_mut().unwrap();
         let main_camera_target = main_camera_target_query.get_single().unwrap();
         let previous_target = camera_target.0;
-        if let Some(previous_target) = previous_target {
-            if previous_target == main_camera_target {
+        if let Some(t) = previous_target {
+            if t == main_camera_target {
                 return;
             }
         }
-
         camera_target.0 = Some(main_camera_target);
     }
 }
