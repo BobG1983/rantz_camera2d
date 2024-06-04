@@ -17,45 +17,43 @@ pub fn camera_follow_target(
     all_positions_query: Query<&Position2D, Without<Camera>>,
     time: Res<Time>,
 ) {
-    camera_query.par_iter_mut().for_each(
-        |(mut camera_position, style, lp, mut ld, camera_target, ortho)| {
-            if camera_target.0.is_none() {
-                return;
-            }
+    for (mut camera_position, style, lp, mut ld, camera_target, ortho) in camera_query.iter_mut() {
+        if camera_target.0.is_none() {
+            return;
+        }
 
-            if !all_positions_query.contains(camera_target.0.unwrap()) {
-                return;
-            }
+        if !all_positions_query.contains(camera_target.0.unwrap()) {
+            return;
+        }
 
-            match style {
-                CameraStyle::DeadZone(deadzone) => {
-                    handle_deadzone(
-                        &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
-                        &mut camera_position,
-                        &deadzone,
-                        &mut ld,
-                        &lp,
-                        time.delta_seconds(),
-                    );
-                }
-                CameraStyle::ScreenByScreen => {
-                    handle_screen_by_screen(
-                        &ortho,
-                        &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
-                        &mut camera_position,
-                        &lp.factor,
-                        time.delta_seconds(),
-                    );
-                }
-                CameraStyle::Exact => {
-                    handle_exact(
-                        &mut camera_position,
-                        &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
-                    );
-                }
+        match style {
+            CameraStyle::DeadZone(deadzone) => {
+                handle_deadzone(
+                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                    &mut camera_position,
+                    &deadzone,
+                    &mut ld,
+                    &lp,
+                    time.delta_seconds(),
+                );
             }
-        },
-    )
+            CameraStyle::ScreenByScreen => {
+                handle_screen_by_screen(
+                    &ortho,
+                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                    &mut camera_position,
+                    &lp.factor,
+                    time.delta_seconds(),
+                );
+            }
+            CameraStyle::Exact => {
+                handle_exact(
+                    &mut camera_position,
+                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                );
+            }
+        }
+    }
 }
 
 fn handle_exact(camera_position: &mut Position2D, target_pos: &Position2D) {
