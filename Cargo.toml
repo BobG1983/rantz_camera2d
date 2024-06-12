@@ -1,6 +1,6 @@
 [package]
 name = "rantz_camera2d"
-version = "0.3.10"
+version = "1.0.0"
 authors = ["Robert Gardner'"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -22,8 +22,8 @@ bevy_core_pipeline = ["bevy/bevy_core_pipeline"]
 opt-level = 1
 
 [dependencies]
-bevy = { version = "0.13.2", default-features = false }
-rantz_spatial2d = "0.3.7"
+bevy = { version = "0.14.0", default-features = false }
+rantz_spatial2d = "1.0.0"
 # rantz_spatial2d = { path = "../rantz_spatial2d" }
 
 
