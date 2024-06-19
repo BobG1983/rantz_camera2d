@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
+      - name: Install libudev
+        run: sudo apt-get install libudev-dev  
       - run: cargo test
       - name: Run release-plz
         uses: MarcoIeni/release-plz-action@v0.5
