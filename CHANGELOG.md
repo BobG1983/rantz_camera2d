@@ -6,4 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0](https://github.com/BobG1983/rantz_camera2d/compare/v0.3.10...v0.4.0) - 2024-06-19
+
+### Added
+- [**breaking**] Adding release-plz to manage versions and release process
+
+### Other
+- Adding alsa to CI
+- Adding libudev to CI
+
 
