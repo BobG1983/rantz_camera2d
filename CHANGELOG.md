@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0](https://github.com/BobG1983/rantz_camera2d/compare/v0.4.0...v0.5.0) - 2024-06-24
+
+### Other
+- updating release-plz regex
+- Updating version of rantz_spatial2d
+- Adding install linux deps
+- Moving back to ubuntu for CI cos the compiler on windows is much slower
+- fixed a typo in a method name and started using clippy
+- Only release on certain commits, and only publish with PR
+- Removed config.toml file that wasn't required
+
 ## [0.4.0](https://github.com/BobG1983/rantz_camera2d/compare/v0.3.10...v0.4.0) - 2024-06-19
 
 ### Added
