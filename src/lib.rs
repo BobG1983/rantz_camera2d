@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 mod components;
 mod main_camera;
 mod plugins;

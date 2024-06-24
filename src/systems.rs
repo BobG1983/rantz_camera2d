@@ -29,18 +29,18 @@ pub fn camera_follow_target(
         match style {
             CameraStyle::DeadZone(deadzone) => {
                 handle_deadzone(
-                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                    all_positions_query.get(camera_target.0.unwrap()).unwrap(),
                     &mut camera_position,
-                    &deadzone,
+                    deadzone,
                     &mut ld,
-                    &lp,
+                    lp,
                     time.delta_seconds(),
                 );
             }
             CameraStyle::ScreenByScreen => {
                 handle_screen_by_screen(
-                    &ortho,
-                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                    ortho,
+                    all_positions_query.get(camera_target.0.unwrap()).unwrap(),
                     &mut camera_position,
                     &lp.factor,
                     time.delta_seconds(),
@@ -49,7 +49,7 @@ pub fn camera_follow_target(
             CameraStyle::Exact => {
                 handle_exact(
                     &mut camera_position,
-                    &all_positions_query.get(camera_target.0.unwrap()).unwrap(),
+                    all_positions_query.get(camera_target.0.unwrap()).unwrap(),
                 );
             }
         }
@@ -57,7 +57,7 @@ pub fn camera_follow_target(
 }
 
 fn handle_exact(camera_position: &mut Position2D, target_pos: &Position2D) {
-    *camera_position = target_pos.clone();
+    *camera_position = *target_pos;
 }
 
 fn handle_deadzone(
@@ -68,17 +68,17 @@ fn handle_deadzone(
     lp: &CameraLerp,
     dt: f32,
 ) {
-    let mut scroll_dist = calculate_scroll_distance_for_deadzone(&deadzone, &target_pos, &cam_pos);
+    let mut scroll_dist = calculate_scroll_distance_for_deadzone(deadzone, target_pos, cam_pos);
 
     // Apply lead
     if ld.last_target_position.is_none() {
-        ld.last_target_position = Some(target_pos.clone());
+        ld.last_target_position = Some(*target_pos);
     }
     let last_target = ld.last_target_position.unwrap();
     let dir_of_target_movement = Vec2::from(target_pos - last_target).normalize_or_zero();
     let lead_vec = dir_of_target_movement * ld.lead_amount;
-    scroll_dist = scroll_dist + lead_vec;
-    ld.last_target_position = Some(target_pos.clone());
+    scroll_dist += lead_vec;
+    ld.last_target_position = Some(*target_pos);
 
     // Apply lerp
     let new_pos = Position2D::new(
@@ -97,7 +97,7 @@ fn handle_screen_by_screen(
     dt: f32,
 ) {
     let scaled_bounds = calculate_scaled_screenbounds(ortho);
-    let cam_pos = camera_position.clone();
+    let cam_pos = *camera_position;
     let sw = scaled_bounds.x;
     let sh = scaled_bounds.y;
     let hw = sw / 2.;
@@ -156,7 +156,7 @@ fn distance_to_next_screenbounds(cam_pos: Position2D, sw: f32, sh: f32) -> Vec2 
     let mut scroll_dist = Vec2::new(0.0, 0.0);
     let mod_x = cam_pos.x % sw;
     let mod_y = cam_pos.y % sh;
-    if mod_x < 0.0 || mod_x > 0.0 {
+    if mod_x != 0.0 {
         scroll_dist.x = -sw - mod_x;
     }
 
@@ -176,7 +176,7 @@ fn distance_to_next_screenbounds(cam_pos: Position2D, sw: f32, sh: f32) -> Vec2 
 }
 
 fn lerp(target: f32, current: f32, factor: f32) -> f32 {
-    return current + (target - current) * factor;
+    current + (target - current) * factor
 }
 
 fn calculate_scroll_distance_for_deadzone(

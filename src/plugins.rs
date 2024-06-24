@@ -25,7 +25,7 @@ impl CameraPlugin2D {
     fn add_systems(&self, app: &mut App) {
         app.add_systems(
             PostStartup,
-            set_intial_main_camera_target.before(SpatialSystems2D::Propogate),
+            set_initial_main_camera_target.before(SpatialSystems2D::Propogate),
         )
         .add_systems(
             PostUpdate,
