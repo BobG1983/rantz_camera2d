@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0](https://github.com/BobG1983/rantz_camera2d/compare/v1.0.0...v1.1.0) - 2024-07-05
+
+### Other
+- Updated rantz_spatial2d
+
 ## [0.5.0](https://github.com/BobG1983/rantz_camera2d/compare/v0.4.0...v0.5.0) - 2024-06-24
 
 ### Other
