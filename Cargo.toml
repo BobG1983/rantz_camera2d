@@ -18,5 +18,5 @@ opt-level = 1
 
 [dependencies]
 bevy = "0.14.0"
-rantz_spatial2d = "2.0.0"
+rantz_spatial2d = "3.0.0"
 # rantz_spatial2d = { path = "../rantz_spatial2d" }

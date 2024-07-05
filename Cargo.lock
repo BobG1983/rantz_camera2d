@@ -3025,9 +3025,9 @@ dependencies = [
 
 [[package]]
 name = "rantz_spatial2d"
-version = "2.0.0"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65376ee1a45a37c3023e16f4ea3c5a7fc551f7dc1f62e07ac522e0a22a216bd6"
+checksum = "90c6745951ab79b7484410559710744bf728eb26443e8339ba48db15147ba909"
 dependencies = [
  "bevy",
 ]
