@@ -1,6 +1,6 @@
 [package]
 name = "rantz_camera2d"
-version = "0.5.0"
+version = "1.0.0"
 authors = ["Robert Gardner'"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -13,19 +13,10 @@ description = "A 2D camera plugin for Bevy, inspired by the Love2D camera plugin
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[features]
-default = ["bevy_render", "bevy_core_pipeline"]
-bevy_render = ["bevy/bevy_render"]
-bevy_core_pipeline = ["bevy/bevy_core_pipeline"]
-
 [profile.dev]
 opt-level = 1
 
 [dependencies]
-bevy = { version = "0.13.2", default-features = false }
-rantz_spatial2d = "0.4.0"
+bevy = "0.14.0"
+rantz_spatial2d = "2.0.0"
 # rantz_spatial2d = { path = "../rantz_spatial2d" }
-
-
-[dev-dependencies]
-bevy = "0.13.2"
